@@ -3,24 +3,25 @@
 The **TWS CLI** is a command line tool to help you manage and generate your project styles (colors, typography, spacing, layout) through modular configuration files and generate CSS outputs easily.
 
 ---
+<br>
 
 ## Installation
 
 Install globally via npm:
 
-```bash
+```shell
 npm install -g tws
 ```
 
----
+<br>
 
 ## Usage
 
-```bash
+```shell
 tws <command> [options]
 ```
 
----
+<br>
 
 ## Commands & Options
 
@@ -36,6 +37,7 @@ Initialize your project style setup by creating the configuration folder.
 
 - `-f, --force` — Skip prompts and overwrite existing config folder
 
+<br>
 
 **Example:**
 
@@ -46,9 +48,11 @@ Initialize your project style setup by creating the configuration folder.
 | `tws init --force`            | Create or overwrite the config folder without confirmation               |
 | `tws init --type base --force`| Create the config folder with base setup, overwrite without confirmation |
 
+<br>
 
 ---
 
+<br>
 
 ### 2. `config`
 
@@ -64,6 +68,7 @@ Generate or update configuration files for one or more style modules.
 - `-t, --type <type>` — Choose config type (`base` or `example`)
 - `-f, --force` — Overwrite existing config files without prompt
 
+<br>
 
 **Examples:**
 
@@ -79,7 +84,11 @@ Generate colors config only:
 | `tws config --all --type base --force`        | Generate base config for all modules, overwrite existing       |
 
 
+<br>
+
 ---
+
+<br>
 
 
 ### 3. `css`
@@ -95,6 +104,7 @@ Generate CSS files from your existing style configs.
 - `-a, --all` — Generate CSS for **all modules**
 - `-f, --force` — Force overwrite existing CSS output
 
+<br>
 
 **Examples:**
 
@@ -107,20 +117,24 @@ Generate CSS files from your existing style configs.
 | `tws css --all --force`             | Generate CSS files for all modules, overwrite without confirmation |
 
 
+<br>
+
 ---
+
+<br>
 
 
 ## Typical Workflow
 
 1. **Initialize your project** (creates config folder)
 
-   ```bash
+   ```shell
    tws init
    ```
 
    If you want to add some config after initialization use:
 
-   ```bash
+   ```shell
    tws config
    ```
 
@@ -128,14 +142,18 @@ Generate CSS files from your existing style configs.
 
 3. **Generate CSS files** based on your configs
 
-   ```bash
+   ```shell
    tws css --all
    ```
 
 4. **Include the generated CSS files** in your project’s build or HTML.
 
 
+<br>
+
 ---
+
+<br>
 
 
 ## Notes
@@ -148,18 +166,26 @@ Generate CSS files from your existing style configs.
 - Generated CSS files are saved in the output directories specified inside each config file.
 
 
+<br>
+
 ---
+
+<br>
 
 
 ## Help
 
 For help on any command:
 
-```bash
+```shell
 tws <command> --help
 ```
 
+<br>
+
 ---
+
+<br>
 
 
 Enjoy managing your styles with **TWS CLI**!
