@@ -13,11 +13,13 @@ export default `@layer utilities {
         > #header {
             --_default-inner-area: c-container;
             grid-row: r-header;
+            z-index: 5;
         }
 
         > #aside-left {
             --_default-inner-area: c-aside-left;
             grid-row: r-aside-left;
+            z-index: 2;
 
             @media (min-width: 64rem) {
                 grid-column: c-full-width / c-aside-left;
@@ -27,11 +29,13 @@ export default `@layer utilities {
         > #main {
             --_default-inner-area: c-main;
             grid-row: r-main;
+            z-index: 1;
         }
 
         > #aside-right {
             --_default-inner-area: c-aside-right;
             grid-row: r-aside-right;
+            z-index: 3;
 
             @media (min-width: 64rem) {
                 grid-column: c-aside-right / c-full-width;
@@ -41,6 +45,7 @@ export default `@layer utilities {
         > #footer {
             --_default-inner-area: c-container;
             grid-row: r-footer;
+            z-index: 4;
         }
     }
 }`
