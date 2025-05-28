@@ -118,7 +118,12 @@ export async function configCommand(
   });
 
   // Check for already existing config files
-  const alreadyExisting = filesToCreate.filter(async (file) => await fs.pathExists(file.targetFile));
+  const alreadyExisting = await Promise.all(
+    filesToCreate.map(async (file) => ({
+      ...file,
+      exists: await fs.pathExists(file.targetFile),
+    }))
+  ).then((result) => result.filter((file) => file.exists));
 
   let overwriteSelection: string[] = [];
 
@@ -155,6 +160,7 @@ export async function configCommand(
       overwriteSelection = result;
     }
   }
+
 
   // Start spinner to indicate progress
   const s = spinner();

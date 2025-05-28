@@ -15,20 +15,20 @@ export async function cssCommand(options: {
   typography?: boolean;
   spacing?: boolean;
   layout?: boolean;
-  all?: boolean;
+  all?: boolean;  // Aggiungi la gestione di --all
   force?: boolean;
 }) {
   console.clear();
-  intro(chalk.bgBlue.white(` Generating CSS from configs `));
+  intro(chalk.bgBlue(chalk.white(` Generating CSS from configs `)));
 
-  // Check if config folder exists
+  // Controlla se la cartella di configurazione esiste
   const exists = await fs.pathExists(CONFIG_DIR);
   if (!exists) {
     logError(`Hmm, couldn't find the "${CONFIG_DIR}" folder. Run 'tws init' first.`);
     return;
   }
 
-  // Find all .config.json files in the config folder
+  // Trova tutti i file .config.json nella cartella di configurazione
   const configFiles = await globby('*.config.json', { cwd: CONFIG_DIR });
 
   if (configFiles.length === 0) {
@@ -36,40 +36,32 @@ export async function cssCommand(options: {
     return;
   }
 
-  // Extract module names from file names
+  // Estrai i nomi dei moduli dai file
   const availableModules = configFiles.map((f) => f.replace('.config.json', ''));
 
   let selectedModules: string[] = [];
 
-  // Select all modules if --all is passed
+  // Se --all è passato, seleziona tutti i moduli
   if (options.all) {
-    selectedModules = availableModules;
+    selectedModules = availableModules;  // Seleziona tutti i moduli disponibili
   } else {
-    // Otherwise pick only those explicitly flagged
-    for (const mod of availableModules) {
-      if (options[mod as keyof typeof options]) selectedModules.push(mod);
+    // Controlla se ci sono moduli richiesti senza configurazione
+    const missingConfigs = Object.entries(options).filter(([key, value]) => value === true && !availableModules.includes(key) && key !== 'force');
+
+    if (missingConfigs.length > 0) {
+      const missingModuleNames = missingConfigs.map(([key]) => key);
+      // Mostra errore dinamico per i moduli mancanti
+      logError(`The following modules are not configured: ${missingModuleNames.join(', ')}. Run 'tws config --<module>' to create them.`);
+      return;
+    }
+
+    // Se ci sono moduli esplicitamente selezionati, bypassa il multiselect e procedi direttamente
+    if (Object.keys(options).some(key => options[key as keyof typeof options])) {
+      selectedModules = Object.keys(options).filter(key => options[key as keyof typeof options] && key !== 'force'); // Escludi "force" dalla selezione dei moduli
     }
   }
 
-  // Check for CLI-requested modules that don't have config files
-  const requestedModules = Object.entries(options)
-    .filter(([k, v]) => availableModules.includes(k) && v === true)
-    .map(([k]) => k);
-
-  const missingConfigs = requestedModules.filter(
-    (mod) => !availableModules.includes(mod)
-  );
-
-  if (missingConfigs.length > 0) {
-    for (const mod of missingConfigs) {
-      logError(
-        `Missing configuration for "${mod}". Try running 'tws config --${mod}' to create it.`
-      );
-    }
-    return;
-  }
-
-  // If no modules selected yet, prompt user
+  // Se nessun modulo è stato selezionato esplicitamente e --all non è abilitato, chiedi all'utente di scegliere tramite multiselect
   if (selectedModules.length === 0) {
     const result = await multiselect({
       message: 'Choose which modules you want to generate CSS for:',
@@ -84,10 +76,28 @@ export async function cssCommand(options: {
     selectedModules = result as string[];
   }
 
-  // Handle potential overwrites (if force not enabled)
+  // Verifica per i moduli richiesti che non hanno file di configurazione
+  const requestedModules = Object.entries(options)
+    .filter(([k, v]) => availableModules.includes(k) && v === true)
+    .map(([k]) => k);
+
+  const missingRequestedConfigs = requestedModules.filter(
+    (mod) => !availableModules.includes(mod)
+  );
+
+  if (missingRequestedConfigs.length > 0) {
+    for (const mod of missingRequestedConfigs) {
+      logError(`Configuration is missing for the "${mod}" module. Run 'tws config --${mod}' to create it.`);
+    }
+    return;
+  }
+
+  // Gestisci la sovrascrittura (se l'opzione force non è abilitata)
   let modulesToOverwrite: string[] = [];
 
-  if (!options.force) {
+  const isForceEnabled = options.force ?? false;
+
+  if (!isForceEnabled) {
     const existingOutputModules: { mod: string; outDir: string }[] = [];
 
     for (const mod of selectedModules) {
@@ -104,7 +114,7 @@ export async function cssCommand(options: {
       }
     }
 
-    // Handle single or multiple overwrite prompts
+    // Gestisci i prompt di sovrascrittura per un singolo o più moduli
     if (existingOutputModules.length === 1) {
       const { mod, outDir } = existingOutputModules[0];
       const confirmOverwrite = await confirm({
@@ -133,7 +143,7 @@ export async function cssCommand(options: {
 
       modulesToOverwrite = overwriteResult as string[];
 
-      // Remove from processing those not selected for overwrite
+      // Rimuovi dalla lista quelli che non sono selezionati per la sovrascrittura
       selectedModules = selectedModules.filter((mod) => {
         const hasOutput = existingOutputModules.some((m) => m.mod === mod);
         if (hasOutput) {
@@ -143,22 +153,22 @@ export async function cssCommand(options: {
       });
     }
   } else {
-    // If --force, overwrite everything
+    // Se --force è abilitato, sovrascrivi tutto
     modulesToOverwrite = selectedModules;
   }
 
   const s = spinner();
   s.start('Processing your styles...');
 
-  // Loop through all selected modules and generate CSS
+  // Cicla attraverso tutti i moduli selezionati e genera i CSS
   for (const mod of selectedModules) {
     const configPath = join(CONFIG_DIR, `${mod}.config.json`);
     const config = await fs.readJSON(configPath);
     const outDir = resolve(config.outDir);
 
-    // Clean existing output if needed
+    // Pulisce l'output esistente se necessario
     if (await fs.pathExists(outDir)) {
-      if (options.force || modulesToOverwrite.includes(mod)) {
+      if (isForceEnabled || modulesToOverwrite.includes(mod)) {
         await fs.remove(outDir);
       } else {
         s.stop(`Skipped "${mod}" since output already exists.`);
@@ -169,7 +179,7 @@ export async function cssCommand(options: {
     await fs.ensureDir(outDir);
 
     try {
-      // Dynamically import the module's config processor
+      // Import dinamico del processore di configurazione del modulo
       const {
         [`${capitalize(mod)}ConfigProcessor`]: ProcessorClass,
       } = await import(
@@ -177,8 +187,8 @@ export async function cssCommand(options: {
       );
       const processor = new ProcessorClass();
 
-      // Generate the CSS files from config
-      const files = await processor.processConfig(config, options.force ?? false);
+      // Genera i file CSS dalla configurazione
+      const files = await processor.processConfig(config, isForceEnabled);
 
       for (const file of files) {
         const contentWithHeader = cssHeaderFile + file.content;
@@ -195,7 +205,7 @@ export async function cssCommand(options: {
   outro(chalk.blue.bold.underline(`CSS generation complete. You're good to go.`));
 }
 
-// Utility function to capitalize the first letter of a string
+// Funzione di utilità per capitalizzare la prima lettera di una stringa
 function capitalize(str: string) {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
