@@ -5,6 +5,12 @@
   "bin": {
     "tws": "./bin/tws"
   },
+  "files": [
+    "dist",
+    "bin",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
     "clean": "rimraf dist",
     "copy-json": "npx copyfiles -u 2 \"src/modules/**/config/*.json\" dist/modules",
