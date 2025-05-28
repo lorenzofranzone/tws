@@ -1,0 +1,15 @@
+{
+    "outDir": "src/styles/tws/layout",
+    "data": {
+        "container": "Use a number, NOT a string",
+        "columnGap": [],
+        "rowGap": [],
+        "breakout": "Use a number, NOT a string",
+        "columnsCount": {
+            "aside-single": [],
+            "aside-left": [],
+            "aside-right": []
+        },
+        "extraMargin": "Use a number, NOT a string"
+    }
+}

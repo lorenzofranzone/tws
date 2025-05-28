@@ -1,0 +1,15 @@
+{
+    "outDir": "src/styles/tws/layout",
+    "data": {
+        "container": 1110,
+        "columnGap": [10, 30],
+        "rowGap": [0],
+        "breakout": 40,
+        "columnsCount": {
+            "aside-single": [0, 0, 0, 4],
+            "aside-left": [0, 0, 0, 3],
+            "aside-right": [0, 0, 0, 3]
+        },
+        "extraMargin": 8
+    }
+}
