@@ -77,8 +77,7 @@ export type TDoubleColumnsCount = 0 | 2 | 3 | 4;
 export interface ILayoutConfig
   extends IConfigBase<{
     container?: number;
-    columnGap?: TClampSize;
-    rowGap?: TClampSize;
+    gap?: TClampSize;
     breakout?: number;
     columnsCount?: TColumnsCount;
     extraMargin?: number;

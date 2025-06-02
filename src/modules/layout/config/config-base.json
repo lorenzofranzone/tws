@@ -2,8 +2,7 @@
     "outDir": "src/styles/tws/layout",
     "data": {
         "container": "Use a number, NOT a string",
-        "columnGap": [],
-        "rowGap": [],
+        "gap": [],
         "breakout": "Use a number, NOT a string",
         "columnsCount": {
             "aside-single": [],

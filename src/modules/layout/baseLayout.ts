@@ -8,9 +8,8 @@ export default (options: IProcessedLayout) => `@theme {
 
 @layer base {
     [data-layout] {
-        --layout-container-width: ${options.container};
-        --layout-gap-x: ${options.columnGap};
-        --layout-gap-y: ${options.rowGap};
+        --layout-container: ${options.container};
+        --layout-gap: ${options.gap};
         --layout-breakout-width: ${options.breakout};
         --layout-single-aside-columns-count: ${options.columnsCount['aside-single'][0] ?? 0};
         --layout-aside-left-columns-count: ${options.columnsCount['aside-left'][0] ?? 0};

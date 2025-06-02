@@ -5,8 +5,7 @@ import { ILayoutConfig, TClampSize, TColumnsCount } from '../interfaces';
 export interface IProcessedLayout {
   container: string;
   breakout: string | number;
-  columnGap: string | number;
-  rowGap: string | number;
+  gap: string | number;
   columnsCount: TColumnsCount;
   extraMargin?: string;
 }
@@ -31,7 +30,7 @@ export function processLayout(config: ILayoutConfig) {
   }
 
   const { outDir, data } = config;
-  const { container, columnGap, rowGap, breakout, columnsCount, extraMargin } = data;
+  const { container, gap, breakout, columnsCount, extraMargin } = data;
 
   const processedLayout = {} as IProcessedLayout;
 
@@ -47,12 +46,8 @@ export function processLayout(config: ILayoutConfig) {
     }
 
     // Clamp-based conversion for gaps
-    if (columnGap) {
-      processedLayout.columnGap = clamp(columnGap as TClampSize);
-    }
-
-    if (rowGap) {
-      processedLayout.rowGap = clamp(rowGap as TClampSize);
+    if (gap) {
+      processedLayout.gap = clamp(gap as TClampSize);
     }
 
     // Process nested column definitions
@@ -94,7 +89,7 @@ function validateLayoutConfig(config: ILayoutConfig, errors: Set<string>) {
     return;
   }
 
-  const { container, columnGap, rowGap, breakout, columnsCount, extraMargin } = config.data;
+  const { container, gap, breakout, columnsCount, extraMargin } = config.data;
 
   if (container !== undefined && typeof container !== 'number') {
     errors.add("'container' should be a number (e.g. 1280).");
@@ -108,12 +103,8 @@ function validateLayoutConfig(config: ILayoutConfig, errors: Set<string>) {
     errors.add("'extraMargin' should be a number.");
   }
 
-  if (columnGap !== undefined && !Array.isArray(columnGap)) {
-    errors.add("'columnGap' must be an array using clamp format (e.g. [16, 24, 32]).");
-  }
-
-  if (rowGap !== undefined && !Array.isArray(rowGap)) {
-    errors.add("'rowGap' must be an array using clamp format (e.g. [16, 24, 32]).");
+  if (gap !== undefined && !Array.isArray(gap)) {
+    errors.add("'gap' must be an array using clamp format (e.g. [16, 24, 32]).");
   }
 
   if (columnsCount !== undefined) {
