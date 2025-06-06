@@ -1,13 +1,19 @@
-# TWS CLI — Tailwind CSS Style Generator
+# TWS — Tailwind 4 Styles Generator
 
-The **TWS CLI** is a command line tool to help you manage and generate your project styles (colors, typography, spacing, layout) through modular configuration files and generate CSS outputs easily.
+**TWS** is a command line tool to help you manage and generate modular Tailwind 4 styles with smart themes, responsive scales, and grid-powered layouts through modular configuration files and generate CSS outputs easily.
+
+Instantly generate semantic colors for any theme with built-in support for light and dark modes, responsive typography and spacing, and a flexible layout system based on a 12-column grid — all designed to streamline your design system and speed up your Tailwind workflow.
 
 <br>
 
 ## Installation
 
-Install globally via npm:
+Install via npm:
+```shell
+npm install tws
+```
 
+or if you want it available globally
 ```shell
 npm install -g tws
 ```
@@ -28,144 +34,144 @@ tws <command> [options]
    
    ### 1. `init`
 
-Initialize your project style setup by creating the configuration folder.
+   Initialize your project style setup by creating the configuration folder.
 
-**Options:**
+   **Options:**
 
-- `-t, --type <type>` — Choose config type for the styles to setup:  
-  - `"base"` (minimal setup)  
-  - `"example"` (with example configs)
+   - `-t, --type <type>` — Choose config type for the styles to setup:  
+   - `"base"` (minimal setup)  
+   - `"example"` (with example configs)
 
-- `-f, --force` — Skip prompts and overwrite existing config folder
+   - `-f, --force` — Skip prompts and overwrite existing config folder
 
-<br>
+   <br>
 
-**Examples:**
+   **Examples:**
 
-| Command                       | Explanation                                                              |
-|-------------------------------|--------------------------------------------------------------------------|
-| `tws init`                    | Create the `tws-config` folder interactively                             |
-| `tws init --type example`     | Create the config folder with example config files                       |
-| `tws init --force`            | Create or overwrite the config folder without confirmation               |
-| `tws init --type base --force`| Create the config folder with base setup, overwrite without confirmation |
+   | Command                       | Explanation                                                              |
+   |-------------------------------|--------------------------------------------------------------------------|
+   | `tws init`                    | Create the `tws-config` folder interactively                             |
+   | `tws init --type example`     | Create the config folder with example config files                       |
+   | `tws init --force`            | Create or overwrite the config folder without confirmation               |
+   | `tws init --type base --force`| Create the config folder with base setup, overwrite without confirmation |
 
-<br>
+   <br>
 
----
+   ---
 
-<br>
+   <br>
 
-### 2. `config`
+   ### 2. `config`
 
-Generate or update configuration files for one or more style modules.
+   Generate or update configuration files for one or more style modules.
 
-**Options:**
+   **Options:**
 
-- `-C, --colors` — Generate config for **colors**
-- `-T, --typography` — Generate config for **typography**
-- `-S, --spacing` — Generate config for **spacing**
-- `-L, --layout` — Generate config for **layout**
-- `-a, --all` — Generate config for **all modules at once**
-- `-t, --type <type>` — Choose config type (`base` or `example`)
-- `-f, --force` — Overwrite existing config files without prompt
+   - `-C, --colors` — Generate config for **colors**
+   - `-T, --typography` — Generate config for **typography**
+   - `-S, --spacing` — Generate config for **spacing**
+   - `-L, --layout` — Generate config for **layout**
+   - `-a, --all` — Generate config for **all modules at once**
+   - `-t, --type <type>` — Choose config type (`base` or `example`)
+   - `-f, --force` — Overwrite existing config files without prompt
 
-<br>
+   <br>
 
-**Examples:**
+   **Examples:**
 
-| Command                                        | Explanation                                                   |
-|-----------------------------------------------|----------------------------------------------------------------|
-| `tws config`                                  | Run config command with interactive prompts                    |
-| `tws config --colors`                         | Generate config for colors module only                         |
-| `tws config --colors --typography`            | Generate config for colors and typography modules              |
-| `tws config --colors --type example`          | Generate colors config with example setup                      |
-| `tws config --colors --type base --force`     | Generate base colors config, overwrite existing without prompt |
-| `tws config --all --type base --force`        | Generate base config for all modules, overwrite existing       |
-
-
-<br>
-
----
-
-<br>
+   | Command                                        | Explanation                                                   |
+   |-----------------------------------------------|----------------------------------------------------------------|
+   | `tws config`                                  | Run config command with interactive prompts                    |
+   | `tws config --colors`                         | Generate config for colors module only                         |
+   | `tws config --colors --typography`            | Generate config for colors and typography modules              |
+   | `tws config --colors --type example`          | Generate colors config with example setup                      |
+   | `tws config --colors --type base --force`     | Generate base colors config, overwrite existing without prompt |
+   | `tws config --all --type base --force`        | Generate base config for all modules, overwrite existing       |
 
 
-### 3. `css`
+   <br>
 
-Generate CSS files from your existing style configs.
+   ---
 
-**Options:**
-
-- `-C, --colors` — Generate CSS for **colors**
-- `-T, --typography` — Generate CSS for **typography**
-- `-S, --spacing` — Generate CSS for **spacing**
-- `-L, --layout` — Generate CSS for **layout**
-- `-a, --all` — Generate CSS for **all modules**
-- `-f, --force` — Force overwrite existing CSS output
-
-<br>
-
-**Examples:**
-
-| Command                             | Explanation                                                        |
-|-------------------------------------|--------------------------------------------------------------------|
-| `tws css`                           | Generate CSS files interactively (prompt for modules)              |
-| `tws css --colors`                  | Generate CSS files for the colors module                           |
-| `tws css --colors --typography`     | Generate CSS files for both colors and typography modules          |
-| `tws css --colors --force`          | Generate CSS files for colors, overwrite without confirmation      |
-| `tws css --all --force`             | Generate CSS files for all modules, overwrite without confirmation |
+   <br>
 
 
-<br>
+   ### 3. `css`
 
----
+   Generate CSS files from your existing style configs.
 
-<br>
+   **Options:**
 
+   - `-C, --colors` — Generate CSS for **colors**
+   - `-T, --typography` — Generate CSS for **typography**
+   - `-S, --spacing` — Generate CSS for **spacing**
+   - `-L, --layout` — Generate CSS for **layout**
+   - `-a, --all` — Generate CSS for **all modules**
+   - `-f, --force` — Force overwrite existing CSS output
 
-## Typical Workflow
+   <br>
 
-1. **Initialize your project** (creates config folder)
+   **Examples:**
 
-   ```shell
-   tws init
-   ```
-
-   If you want to add some config after initialization use:
-
-   ```shell
-   tws config
-   ```
-
-2. **Edit the config files** inside the generated `tws-config/` folder to customize your styles.
-
-3. **Generate CSS files** based on your configs
-
-   ```shell
-   tws css --all
-   ```
-
-4. **Include the generated CSS files** in your project’s build or HTML.
+   | Command                             | Explanation                                                        |
+   |-------------------------------------|--------------------------------------------------------------------|
+   | `tws css`                           | Generate CSS files interactively (prompt for modules)              |
+   | `tws css --colors`                  | Generate CSS files for the colors module                           |
+   | `tws css --colors --typography`     | Generate CSS files for both colors and typography modules          |
+   | `tws css --colors --force`          | Generate CSS files for colors, overwrite without confirmation      |
+   | `tws css --all --force`             | Generate CSS files for all modules, overwrite without confirmation |
 
 
-<br>
+   <br>
 
----
+   ---
 
-<br>
+   <br>
 
 
-## Notes
+   ## Typical Workflow
 
-- Running `tws init` will create a `tws-config/` folder if it doesn’t exist.
-- If the `tws-config/` folder already exists, the CLI will ask if you want to overwrite it unless you use the `--force` flag.
-- You can generate or update configs module-by-module or all at once.
-- The CLI ensures you don’t overwrite existing CSS outputs without confirmation unless you use `--force`.
-- Config files are saved as JSON in the `tws-config/` folder.
-- Generated CSS files are saved in the output directories specified inside each config file.
-</details>
+   1. **Initialize your project** (creates config folder)
 
-<br>
+      ```shell
+      tws init
+      ```
+
+      If you want to add some config after initialization use:
+
+      ```shell
+      tws config
+      ```
+
+   2. **Edit the config files** inside the generated `tws-config/` folder to customize your styles.
+
+   3. **Generate CSS files** based on your configs
+
+      ```shell
+      tws css --all
+      ```
+
+   4. **Include the generated CSS files** in your project’s build or HTML.
+
+
+   <br>
+
+   ---
+
+   <br>
+
+
+   ## Notes
+
+   - Running `tws init` will create a `tws-config/` folder if it doesn’t exist.
+   - If the `tws-config/` folder already exists, the CLI will ask if you want to overwrite it unless you use the `--force` flag.
+   - You can generate or update configs module-by-module or all at once.
+   - The CLI ensures you don’t overwrite existing CSS outputs without confirmation unless you use `--force`.
+   - Config files are saved as JSON in the `tws-config/` folder.
+   - Generated CSS files are saved in the output directories specified inside each config file.
+   </details>
+
+   <br>
 
 ## Config files
 <details>
@@ -182,7 +188,7 @@ Generate CSS files from your existing style configs.
 
    <br>
 
-   ## Colors Configuration
+   ### Colors Configuration
 
    | Key                  | Type                | Description                                                             | Example                     |
    |----------------------|---------------------|-------------------------------------------------------------------------|-----------------------------|
@@ -192,32 +198,51 @@ Generate CSS files from your existing style configs.
    | `data.colors.base`   | `string`            | Base property name for key colors.                                      | `"color"`                   |
    | `data.colors.map`    | `object`            | Object defining groups of theme colors with properties.                 | _See example below_         |
    | `data.default`       | `string`            | Name of the default theme in map as reference for default theme colors  | `"neutral"`                 |
-   | `data.adapter`       | `string` (optional) | If `"wordpress"`, generates WordPress-compatible CSS variables.         | `"wordpress"`               |
+   | `data.adapter`       | `string` (optional) | If `"reference"`, generates all CSS variables by reference.             | `"reference"`               |
 
    <br>
 
-   ### Colors Map Example
+   #### :: Colors Map Example
 
-   Each group under `data.colors.map` defines a theme utility with properties. Values can be:
+   The data.colors.map object defines one or more named themes. Each theme can define multiple semantic properties (color, on-color, outline, etc.). Each property accepts:
 
-   - CSS variables prefixed with `--` (resolved as `var(--color-<name>)`)
-   - HEX, RGB, HSL, or named CSS colors.
+   - A single value (used for all modes)
+   - An array of values (one for each mode in modes)
+   - CSS variables (e.g., "--neutral-50") or raw color values ("#ccc", "rgb(...)", "hsl(...)")
 
    ```json
    {
-   "black": ["#000"], // Fixed for light and dark
-   "neutral": {
-      "color": ["--neutral-50", "--indigo-950"], // First value applies to the first mode in modes (e.g., "light"), second to the second (e.g., "dark")
-      "on-color": ["--neutral-950", "--neutral-100"],
-      "outline": ["#ccc", "rgb(100, 100, 100)"]
-   },
+      "dark": ["#121212"], // Fixed for light and dark
+      "neutral": {
+         "color": ["--neutral-50", "--indigo-950"], // First value applies to the first mode in modes (e.g., "light"), second to the second (e.g., "dark")
+         "on-color": ["--neutral-950", "--neutral-100"],
+         "outline": ["#ccc", "rgb(100, 100, 100)"]
+      },
+      "primary": {
+         "color": ["--primary-500", "--primary-400"],
+         "on-color": ["--neutral-950"],
+      },
    }
    ```
 
-   In this case you can use:
-   ```<div class="theme-neutral bg-color text-on-color border-2 border-outline">...</div>```
-   If both light and dark modes are defined, everything works automatically—no extra configuration needed.
+   In this example:
+   - neutral and primary define semantic themes.
+   - Each theme can automatically switch between light/dark values based on the selected mode.
+   - You can change the theme just by applying a class:
 
+   ```html
+   <div class="theme-neutral bg-color text-on-color">...</div>
+   <div class="theme-primary bg-color text-on-color">...</div>
+   ```
+   Switching between themes updates all related colors automatically.
+   Switching modes (e.g. via data-theme="dark" if using toggle: "attr") adapts them for dark mode:
+   ```html
+   <html data-theme="dark">
+      ...
+   </html>
+   ```
+
+   No need to manually rewrite CSS — everything is scoped and generated for you.
 
    <br>
 
@@ -226,7 +251,7 @@ Generate CSS files from your existing style configs.
    <br>
 
 
-   ## Typography and Spacing Configuration
+   ### Typography and Spacing Configuration
 
    | Key        | Type            | Description                                            | Example                                   |
    |------------|-----------------|--------------------------------------------------------|-------------------------------------------|
@@ -235,17 +260,17 @@ Generate CSS files from your existing style configs.
 
    <br>
 
-   ### Sizes Example
+   #### :: Sizes Example
 
    Each size can accept:
 
    - A single value (for static sizes)
-   - Two values (min and max in px, converted to rem with `clamp()`)
-   - Three values (min, max, [min-viewport, max-viewport] in px, converted to rem with `clamp()`)
+   - Two numeric values representing the min and max in pixels (px). These will be automatically converted to rem using clamp() under the hood.
+   - Three values — min, max, and [min-viewport, max-viewport] in px. These will be converted following the same logic as above.
 
    <br>
 
-   #### Typography
+   ##### Typography `data.sizes`
 
    ```json
    {
@@ -256,8 +281,14 @@ Generate CSS files from your existing style configs.
    ```
 
    So you can use ```<h1 class="text-h1">...</h1>```
+
+   <br>
    
-   #### Spacing
+   ---
+   
+   <br>
+   
+   ##### Spacing `data.sizes`
 
    ```json
    {
@@ -277,7 +308,7 @@ Generate CSS files from your existing style configs.
    <br>
 
 
-   ## Layout Configuration
+   ### Layout Configuration
 
    | Key                              | Type       | Description                                                                                    | Example                    |
    |----------------------------------|------------|------------------------------------------------------------------------------------------------|----------------------------|
@@ -290,7 +321,7 @@ Generate CSS files from your existing style configs.
    | `data.columnsCount.aside-right`  | `object`   | Defines columns per layout breakpoint: `[mobile, tablet-portrait, tablet-landscape, desktop]`. | `[0, 0, 0, 3]`             |
    | `data.extraMargin`               | `number`   | Additional margin to add on the sides (default margin spaces by gap).                          | `8`                        |
 
-   ### Usage
+   #### Usage
 
    1. **Basic layout structure**
 
@@ -335,46 +366,28 @@ Generate CSS files from your existing style configs.
       Once inside a landmark, you can use *-area utility classes to position your content in specific parts of the grid.
 
 
-      | Class Name                  | Description                                                   |
-      |-----------------------------|---------------------------------------------------------------|
-      | `wide-area`                 | Spans the full width of the layout.                           |
-      | `wide-half-left-area`       | Left half of full width layout (from edge to center).         |
-      | `wide-half-right-area`      | Right half of full width layout (from center to edge).        |
-      | `container-area`            | Content constrained to the container width (c-container).     |
-      | `container-wide-left-area`  | From left edge to container's right edge.                     |
-      | `container-wide-right-area`	| From container's left edge to the right edge of the layout.   |
-      | `main-area`                 | Uses the central part of the layout (c-main).                 |
-      | `half-left-area`            | Left half of main content area.                               |
-      | `half-right-area`           | Right half of main content area.                              |
-      | `aside-left-area`           | Aligns content within the left aside column (c-aside-left).   |
-      | `aside-right-area`          | Aligns content within the right aside column (c-aside-right). |
-      | `margin-left-area`          | From edge of layout to start of container.                    |
-      | `margin-right-area`         | From end of container to edge of layout.                      |
+      | Class Name                       | Description                                                                |
+      |----------------------------------|----------------------------------------------------------------------------|
+      | `wide-area`                      | Spans the full width of the layout.                                        |
+      | `wide-half-left-area`            | Spans the left half of the full layout (from edge to center).              |
+      | `wide-half-right-area`           | Spans the right half of the full layout (from center to edge).             |
+      | `container-area`                 | Content constrained to the container width                                 |
+      | `container-wide-left-area`       | Spans from the left edge of the layout to the right edge of the container. |
+      | `container-wide-right-area`      | Spans from the left edge of the container to the right edge of the layout. |
+      | `container-half-left-area`       | Left half of the container width.                                          |
+      | `container-half-right-area`      | Right half of the container width.                                         |
+      | `container-third-left-area`      | Left third of the container width.                                         |
+      | `container-two-third-left-area`  | Left two-thirds of the container width.                                    |
+      | `container-third-right-area`     | Right third of the container width.                                        |
+      | `container-two-third-right-area` | Right two-thirds of the container width.                                   |
+      | `main-area`                      | Central content area, excluding side columns.                              |
+      | `half-left-area`                 | Left half of the main content area.                                        |
+      | `half-right-area`                | Right half of the main content area.                                       |
+      | `aside-left-area`                | Content aligned within the left aside column.                              |
+      | `aside-right-area`               | Content aligned within the right aside column.                             |
+      | `margin-left-area`               | From the layout's left edge to the start of the container.                 |
+      | `margin-right-area`              | From the end of the container to the layout’s right edge.                  |
 
-      *When using area classes, the content will align to grid columns set by the layout configuration.*
-
-      <!--
-      ***Reversed layout***
-      In some cases (e.g., RTL support or alternating layouts), you may want to reverse *-left/right-areas:
-
-      ```html
-      <div class="... grid-flow-row-dense">
-         <div class="...">
-            <div class="half-left-area">...</div>
-            <div class="half-right-area">...</div>
-         </div>
-         <div class="... grid-cols-reversed" data-layout>
-            <div class="half-left-area">...</div>
-            <div class="half-right-area">...</div>
-         </div>
-      ```
-
-      This will reverse the areas of the second nested <div>:
-      - half-left-area -> becomes half-right-area
-      - half-right-area -> becomes half-left-area
-
-      Use the `grid-flow-row-dense` class on the parent node to fix the correct behavior.
-      -->
 
    3. **Nesting with Subgrid**
       You can apply subgrid-x, subgrid-y, or subgrid utility classes to allow inner elements to inherit column/row structures:
@@ -391,7 +404,7 @@ Generate CSS files from your existing style configs.
       <br>
 
 
-      ## Notes
+      ### Notes
 
       - All CSS variables must be prefixed with `--*` to be resolved as `var(--<scope>-*)`.
       - Color values support CSS valid colors, or CSS variables.

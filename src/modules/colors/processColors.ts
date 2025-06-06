@@ -8,7 +8,7 @@ import { IColorsConfig } from '../interfaces';
  * ==================================================
  * Transforms a color config object into a CSS-ready structure,
  * including theme variables, custom variants, and utility classes.
- * Handles multiple color schemes, WordPress compatibility, and dark mode.
+ * Handles multiple color schemes, Reference compatibility, and dark mode.
  */
 export function processColors(input: IColorsConfig): { outDir: string; data: any[] } {
   const errors: Set<string> = new Set();
@@ -28,9 +28,9 @@ export function processColors(input: IColorsConfig): { outDir: string; data: any
   const secondMode = modes[1];
   const hasMultiple = modes.length > 1;
 
-  const wpPrefix = '--tws-color';
+  const refPrefix = '--tws-color';
   const regPrefix = '--color';
-  const prefix = adapter === 'wordpress' ? wpPrefix : regPrefix;
+  const prefix = adapter === 'reference' ? refPrefix : regPrefix;
 
   const toCssVar = (v: string) =>
     v.startsWith('--') ? `var(${prefix}-${v.slice(2)})` : v;
@@ -43,13 +43,13 @@ export function processColors(input: IColorsConfig): { outDir: string; data: any
   const secondAdapted: Record<string, string> = {};
   const entries = Object.entries(map) as [string, Record<string, string[]>][];
 
-  // Step 0 - WordPress root vars (if using WP adapter)
-  if (adapter === 'wordpress') {
+  // Step 0 - Reference root vars (if using REF adapter)
+  if (adapter === 'reference') {
     entries.forEach(([key, props]) => {
       Object.entries(props).forEach(([prop, vals]) => {
         const v = vals[0];
         if (v && isValidColor(v)) {
-          firstAdapted[`${wpPrefix}-${key}-${prop}`] = toRootVar(v);
+          firstAdapted[`${refPrefix}-${key}-${prop}`] = toRootVar(v);
         }
       });
     });
@@ -58,8 +58,8 @@ export function processColors(input: IColorsConfig): { outDir: string; data: any
     Object.keys(defMap).forEach(prop => {
       const v = defMap[prop][0];
       if (v && isValidColor(v)) {
-        theme[`${regPrefix}-${prop}`] = `var(${wpPrefix}-${prop})`;
-        firstAdapted[`${wpPrefix}-${prop}`] = toRootVar(v);
+        theme[`${regPrefix}-${prop}`] = `var(${refPrefix}-${prop})`;
+        firstAdapted[`${refPrefix}-${prop}`] = toRootVar(v);
       }
     });
   }
@@ -72,8 +72,8 @@ export function processColors(input: IColorsConfig): { outDir: string; data: any
       return;
     }
     if (v) {
-      theme[`${regPrefix}-${key}`] = adapter === 'wordpress'
-        ? `var(${wpPrefix}-${key}-${base})`
+      theme[`${regPrefix}-${key}`] = adapter === 'reference'
+        ? `var(${refPrefix}-${key}-${base})`
         : toCssVar(v);
       theme[`${regPrefix}-${key}-fixed`] = toRootVar(v);
     }
@@ -88,8 +88,8 @@ export function processColors(input: IColorsConfig): { outDir: string; data: any
       return;
     }
     if (v && !theme.hasOwnProperty(`${regPrefix}-${prop}`)) {
-      theme[`${regPrefix}-${prop}`] = adapter === 'wordpress'
-        ? `var(${wpPrefix}-${prop})`
+      theme[`${regPrefix}-${prop}`] = adapter === 'reference'
+        ? `var(${refPrefix}-${prop})`
         : toCssVar(`--${defaultKey}-${prop}`);
     }
   });
@@ -104,8 +104,8 @@ export function processColors(input: IColorsConfig): { outDir: string; data: any
       }
       if (v) {
         const name = `${regPrefix}-${key}-${prop}`;
-        theme[name] = adapter === 'wordpress'
-          ? `var(${wpPrefix}-${key}-${prop})`
+        theme[name] = adapter === 'reference'
+          ? `var(${refPrefix}-${key}-${prop})`
           : toCssVar(v);
       }
     });
@@ -116,16 +116,16 @@ export function processColors(input: IColorsConfig): { outDir: string; data: any
     entries.forEach(([key, props]) => {
       const v = props[base]?.[1];
       if (v && isValidColor(v)) {
-        const name = adapter === 'wordpress'
-          ? `${wpPrefix}-${key}`
+        const name = adapter === 'reference'
+          ? `${refPrefix}-${key}`
           : `${regPrefix}-${key}`;
         secondAdapted[name] = toRootVar(v);
       }
       Object.entries(props).forEach(([prop, vals]) => {
         const v2 = vals[1];
         if (v2 && isValidColor(v2)) {
-          const name2 = adapter === 'wordpress'
-            ? `${wpPrefix}-${key}-${prop}`
+          const name2 = adapter === 'reference'
+            ? `${refPrefix}-${key}-${prop}`
             : `${regPrefix}-${key}-${prop}`;
           secondAdapted[name2] = toRootVar(v2);
         }
@@ -135,7 +135,7 @@ export function processColors(input: IColorsConfig): { outDir: string; data: any
     Object.entries(defProps).forEach(([prop, vals]) => {
       const v2 = vals[1];
       if (v2 && isValidColor(v2)) {
-        secondAdapted[`${wpPrefix}-${prop}`] = toRootVar(v2);
+        secondAdapted[`${refPrefix}-${prop}`] = toRootVar(v2);
       }
     });
 
@@ -161,8 +161,8 @@ export function processColors(input: IColorsConfig): { outDir: string; data: any
     const utilFixed: Record<string, string> = {};
 
     Object.entries(props).forEach(([prop, vals]) => {
-      utilTheme[`--color-${prop}`] = adapter === 'wordpress'
-        ? `var(${wpPrefix}-${key}-${prop})`
+      utilTheme[`--color-${prop}`] = adapter === 'reference'
+        ? `var(${refPrefix}-${key}-${prop})`
         : `var(${regPrefix}-${key}-${prop})`;
       const bv = vals[0];
       if (bv) utilFixed[`--color-${prop}`] = toRootVar(bv);
@@ -175,11 +175,11 @@ export function processColors(input: IColorsConfig): { outDir: string; data: any
     const onAccentVal = props['on-accent']?.[0];
     if (accentVal && onAccentVal) {
       dynamic['@layer utilities']['[class*="theme-"]'][`:is(.theme-${key}) .theme-accent`] = {
-        '--color-color': adapter === 'wordpress'
-          ? `var(${wpPrefix}-${key}-accent)`
+        '--color-color': adapter === 'reference'
+          ? `var(${refPrefix}-${key}-accent)`
           : `var(${regPrefix}-${key}-accent)`,
-        '--color-on-color': adapter === 'wordpress'
-          ? `var(${wpPrefix}-${key}-on-accent)`
+        '--color-on-color': adapter === 'reference'
+          ? `var(${refPrefix}-${key}-on-accent)`
           : `var(${regPrefix}-${key}-on-accent)`,
       };
       dynamic['@layer utilities']['[class*="theme-"]'][`:is(.theme-${key}-fixed) .theme-accent`] = {
@@ -193,7 +193,7 @@ export function processColors(input: IColorsConfig): { outDir: string; data: any
   const baseLayer: Record<string, any> = {
     '@layer base': {
       ':root': {
-        ...(adapter === 'wordpress' ? firstAdapted : {}),
+        ...(adapter === 'reference' ? firstAdapted : {}),
         'color-scheme': defaultMode
       }
     }

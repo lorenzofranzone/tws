@@ -26,7 +26,7 @@ export interface IColorsConfig
       map: TColorsMap;
     };
     default: string;
-    adapter?: 'wordpress'
+    adapter?: 'reference'
   }> {}
   
 /* -------------------------------------------------- */  
