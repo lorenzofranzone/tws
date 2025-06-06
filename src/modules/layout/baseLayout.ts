@@ -9,13 +9,13 @@ export default (options: IProcessedLayout) => `@theme {
 @layer base {
     [data-layout] {
         --layout-container: ${options.container};
+        --layout-columns-count: 2;
         --layout-gap: ${options.gap};
-        --layout-breakout-width: ${options.breakout};
+        --layout-breakout: ${options.breakout};
         --layout-single-aside-columns-count: ${options.columnsCount['aside-single'][0] ?? 0};
         --layout-aside-left-columns-count: ${options.columnsCount['aside-left'][0] ?? 0};
         --layout-aside-right-columns-count: ${options.columnsCount['aside-right'][0] ?? 0};
-        --layout-extra-margin-width: ${options.extraMargin ?? '0.25rem'};
-        --layout-columns-count: 2;
+        --layout-extra-margin: ${options.extraMargin ?? '0.25rem'};
 
         /* -------------------------------------------------- */
         /* TABLET PORTRAIT */

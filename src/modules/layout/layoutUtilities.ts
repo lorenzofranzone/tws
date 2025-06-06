@@ -118,4 +118,32 @@ export default `@layer base {
     [data-layout="no-gap"] {
         --_column-width: calc(var(--layout-container) / var(--layout-columns-count));
     }
+}
+
+@utility grid-layout-columns-wide {
+  display: grid;
+  grid-template-columns: var(--_wide-layout-columns-strategy);
+  column-gap: var(--layout-gap);
+}
+
+@utility grid-layout-columns {
+    display: grid;
+    grid-template-columns: var(--_boxed-layout-columns-strategy);
+    column-gap: var(--layout-gap);
+}
+
+@utility subgrid-x {
+    display: grid;
+    grid-template-columns: subgrid;
+}
+
+@utility subgrid-y {
+    display: grid;
+    grid-template-rows: subgrid;
+}
+
+@utility subgrid {
+    display: grid;
+    grid-template-columns: subgrid;
+    grid-template-rows: subgrid;
 }`

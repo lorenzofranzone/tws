@@ -1,5 +1,21 @@
-export default `/* Wide */
+export default `@layer utilities {
+    [data-layout] {
+        [class*="-area"] {
+            /* All sub *-area classes */
 
+            &:has(>[class*="-area"]) {
+                @apply subgrid-x;
+            }
+
+            >:not([class*="-area"]) {
+                grid-column: var(--_area, c-main);
+            }
+        }
+    }
+}
+
+/* Wide */
+        
 @utility wide-area {
     grid-column: c-full-width;
 }
@@ -24,6 +40,54 @@ export default `/* Wide */
 
 @utility container-wide-right-area {
     grid-column: c-container / c-full-width-end;
+}
+
+@utility container-half-left-area {
+    grid-column: c-container / center;
+}
+
+@utility container-half-right-area {
+    grid-column: center / c-container;
+}
+
+@utility container-third-left-area {
+    @media (min-width: theme('screens.tx')) {
+        grid-column: c-container / span 2;
+    }
+
+    @media (min-width: theme('screens.d')) {
+        grid-column: c-container / span 4;
+    }
+}
+
+@utility container-two-third-right-area {
+    @media (min-width: theme('screens.tx')) {
+        grid-column: span 4;
+    }
+
+    @media (min-width: theme('screens.d')) {
+        grid-column: span 8;
+    }
+}
+
+@utility container-two-third-left-area {
+    @media (min-width: theme('screens.tx')) {
+        grid-column: c-container / span 4;
+    }
+
+    @media (min-width: theme('screens.d')) {
+        grid-column: c-container / span 8;
+    }
+}
+
+@utility container-third-right-area {
+    @media (min-width: theme('screens.tx')) {
+        grid-column: span 2;
+    }
+
+    @media (min-width: theme('screens.d')) {
+        grid-column: span 4;
+    }
 }
 
 /* Main */
@@ -58,70 +122,4 @@ export default `/* Wide */
 
 @utility margin-right-area {
     grid-column: c-container-end / c-full-width-end;
-}
-
-@layer utilities {
-    [data-layout] {
-        /* Wide */
-
-        .wide-area {
-            @apply wide-area;
-        }
-
-        .wide-half-left-area {
-            @apply wide-half-left-area;
-        }
-
-        .wide-half-right-area {
-            @apply wide-half-right-area;
-        }
-
-        /* Container */
-
-        .container-area {
-            @apply container-area;
-        }
-
-        .container-wide-left-area {
-            @apply container-wide-left-area;
-        }
-
-        .container-wide-right-area {
-            @apply container-wide-right-area;
-        }
-
-        /* Main */
-
-        .main-area {
-            @apply main-area;
-        }
-
-        .half-left-area {
-            @apply half-left-area;
-        }
-
-        .half-right-area {
-            @apply half-right-area;
-        }
-
-        /* Aside */
-
-        .aside-left-area {
-            @apply aside-left-area;
-        }
-
-        .aside-right-area {
-            @apply aside-right-area;
-        }
-
-        /* Margin */
-
-        .margin-left-area {
-            @apply margin-left-area;
-        }
-
-        .margin-right-area {
-            @apply margin-right-area;
-        }
-    }
 }`

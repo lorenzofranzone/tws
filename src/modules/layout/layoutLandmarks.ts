@@ -1,23 +1,35 @@
-export default `@layer utilities {
+export default `@layer base {
     [data-layout] {
-        > :where(#header, #main, [id*="aside-"], #footer) {
+        >:is(#header, #main, [id*="aside-"], #intro, #outro, #footer) {
             grid-column: c-full-width;
             display: grid;
             grid-template-columns: subgrid;
+            align-items: start;
+            align-content: start;
 
-            > * {
-                grid-column: var(--_default-inner-area);
+            >:not([class*="-area"]) {
+                grid-column: var(--_area, c-main);
+                align-self: start;
             }
         }
 
         > #header {
-            --_default-inner-area: c-container;
+            --_area: c-container;
+
             grid-row: r-header;
             z-index: 5;
         }
 
+        > #intro {
+            --_area: c-container;
+            
+            grid-row: r-intro;
+            z-index: 2;
+        }
+
         > #aside-left {
-            --_default-inner-area: c-aside-left;
+            --_area: c-aside-left;
+
             grid-row: r-aside-left;
             z-index: 2;
 
@@ -27,13 +39,13 @@ export default `@layer utilities {
         }
 
         > #main {
-            --_default-inner-area: c-main;
             grid-row: r-main;
             z-index: 1;
         }
 
         > #aside-right {
-            --_default-inner-area: c-aside-right;
+            --_area: c-aside-right;
+
             grid-row: r-aside-right;
             z-index: 3;
 
@@ -42,8 +54,16 @@ export default `@layer utilities {
             }
         }
 
+        > #outro {
+            --_area: c-container;
+            
+            grid-row: r-outro;
+            z-index: 2;
+        }
+        
         > #footer {
-            --_default-inner-area: c-container;
+            --_area: c-container;
+
             grid-row: r-footer;
             z-index: 4;
         }

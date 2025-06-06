@@ -96,7 +96,7 @@ function validateLayoutConfig(config: ILayoutConfig, errors: Set<string>) {
   }
 
   if (breakout !== undefined && typeof breakout !== 'number') {
-    errors.add("'breakout' should be a number (e.g. 1440).");
+    errors.add("'breakout' should be a number (e.g. 40).");
   }
 
   if (extraMargin !== undefined && typeof extraMargin !== 'number') {

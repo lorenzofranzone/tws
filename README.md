@@ -40,7 +40,7 @@ Initialize your project style setup by creating the configuration folder.
 
 <br>
 
-**Example:**
+**Examples:**
 
 | Command                       | Explanation                                                              |
 |-------------------------------|--------------------------------------------------------------------------|
@@ -72,8 +72,6 @@ Generate or update configuration files for one or more style modules.
 <br>
 
 **Examples:**
-
-Generate colors config only:
 
 | Command                                        | Explanation                                                   |
 |-----------------------------------------------|----------------------------------------------------------------|
@@ -165,22 +163,6 @@ Generate CSS files from your existing style configs.
 - The CLI ensures you don’t overwrite existing CSS outputs without confirmation unless you use `--force`.
 - Config files are saved as JSON in the `tws-config/` folder.
 - Generated CSS files are saved in the output directories specified inside each config file.
-
-
-<br>
-
----
-
-<br>
-
-
-## Help
-
-For help on any command:
-
-```shell
-tws <command> --help
-```
 </details>
 
 <br>
@@ -223,18 +205,18 @@ tws <command> --help
 
    ```json
    {
+   "black": ["#000"], // Fixed for light and dark
    "neutral": {
-      "color": ["--neutral-50", "--indigo-950"],
+      "color": ["--neutral-50", "--indigo-950"], // First value applies to the first mode in modes (e.g., "light"), second to the second (e.g., "dark")
       "on-color": ["--neutral-950", "--neutral-100"],
       "outline": ["#ccc", "rgb(100, 100, 100)"]
    },
-   "primary": {
-      "color": ["--violet-950", "--violet-900"],
-      "on-color": ["--white", "--neutral-50"],
-      "gradient-stop-1": ["--violet-950", "--purple-800"]
-   }
    }
    ```
+
+   In this case you can use:
+   ```<div class="theme-neutral bg-color text-on-color border-2 border-outline">...</div>```
+   If both light and dark modes are defined, everything works automatically—no extra configuration needed.
 
 
    <br>
@@ -263,14 +245,29 @@ tws <command> --help
 
    <br>
 
+   #### Typography
+
    ```json
    {
-   "display": [32, 90],
-   "h1": [24, 32],
-   "sm": [14],
-   "responsive": [12, 18, [768, 1024]]
+      "h1": [24, 32], // -> will generate in @theme --text-h1 (uses clamp() to scale from 1.5rem (≤768px) to 2rem (≥1024px))
+      "base": [16], // -> will generate in @theme --text-base (1rem)
+      "custom": [24, 48, [480, 768]] // -> will generate in @theme --text-custom (uses clamp() to scale from 1.5rem (≤480px) to 3rem (≥768px))
    }
    ```
+
+   So you can use ```<h1 class="text-h1">...</h1>```
+   
+   #### Spacing
+
+   ```json
+   {
+      "xl": [24, 32], // -> will generate in @theme --spacing-xl (uses clamp() to scale from 1.5rem (≤768px) to 2rem (≥1024px))
+      "md": [16], // -> will generate in @theme --spacing-md (1rem)
+      "custom": [24, 48, [480, 768]] // -> will generate in @theme --spacing-custom (uses clamp() to scale from 1.5rem (≤480px) to 3rem (≥768px))
+   }
+   ```
+
+   So you can use ```<div class="p-xl">...</div>```
 
 
    <br>
@@ -282,30 +279,139 @@ tws <command> --help
 
    ## Layout Configuration
 
-   | Key                 | Type       | Description                                                                           | Example                    |
-   |---------------------|------------|---------------------------------------------------------------------------------------|----------------------------|
-   | `outDir`            | `string`   | Directory to save the generated CSS files.                                            | `"src/styles/tws/layout"`  |
-   | `data.container`    | `number`   | Width of the container in px.                                                         | `1110`                     |
-   | `data.columnGap`    | `array`    | Defines column gaps with clamp logic.                                                 | `[10, 30]`                 |
-   | `data.rowGap`       | `array`    | Defines row gaps with clamp logic.                                                    | `[0]`                      |
-   | `data.breakout`     | `number`   | Extra lateral spacing beyond container width.                                         | `40`                       |
-   | `data.columnsCount` | `object`   | Defines columns per layout breakpoint: `[mobile, tablet, tablet-landscape, desktop]`. | `[0, 0, 0, 3]`             |
-   | `data.extraMargin`  | `number`   | Additional margin to add on the sides.                                                | `8`                        |
+   | Key                              | Type       | Description                                                                                    | Example                    |
+   |----------------------------------|------------|------------------------------------------------------------------------------------------------|----------------------------|
+   | `outDir`                         | `string`   | Directory to save the generated CSS files.                                                     | `"src/styles/tws/layout"`  |
+   | `data.container`                 | `number`   | Width of the container in px.                                                                  | `1110`                     |
+   | `data.gap`                       | `array`    | Defines the global gaps with clamp logic.                                                      | `[10, 30]`                 |
+   | `data.breakout`                  | `number`   | Defines a width value usable for custom layout scenarios.                                      | `40`                       |
+   | `data.columnsCount.aside-single` | `object`   | Defines columns per layout breakpoint: `[mobile, tablet-portrait, tablet-landscape, desktop]`. | `[0, 0, 0, 4]`             |
+   | `data.columnsCount.aside-left`   | `object`   | Defines columns per layout breakpoint: `[mobile, tablet-portrait, tablet-landscape, desktop]`. | `[0, 0, 0, 3]`             |
+   | `data.columnsCount.aside-right`  | `object`   | Defines columns per layout breakpoint: `[mobile, tablet-portrait, tablet-landscape, desktop]`. | `[0, 0, 0, 3]`             |
+   | `data.extraMargin`               | `number`   | Additional margin to add on the sides (default margin spaces by gap).                          | `8`                        |
+
+   ### Usage
+
+   1. **Basic layout structure**
+
+      The layout system is based on a 12-column CSS grid. You must wrap your main sections in a <body data-layout> or a container with data-layout attribute.
+
+      ```html
+      <body data-layout>
+         <!--Header Landmark-->
+         <header id="header">...</header>
+         <!--Optional intro section-->
+         <div id="intro">...</div>
+         <!--Optional Aside Left Landmark-->
+         <aside id="aside-left">...</aside>
+         <!--Header Landmark-->
+         <main id="main">...</main>
+         <!--Optional Aside Right Landmark-->
+         <aside id="aside-right">...</aside>
+         <!--Header Landmark-->
+         <div id="outro">...</div>
+         <!--Footer Landmark-->
+         <div id="footer">...</div>
+      </body>
+      ```
+      
+      - You can omit any of these sections. The layout adapts based on presence of #aside-left and #aside-right.
+      - This structure ensures consistent column management and responsive behavior.
+
+      If you want to remove spacing between columns:
+
+      ```html
+      <body data-layout="no-gap">
+         ...
+      </body>
+      ```
+
+   2. **Landmark rules**
+
+      Landmarks like #header, #main, #footer or #intro and #outro are automatically positioned using the full-width grid.
+      #aside-left, #aside-right spans the columns defined in the layout.config.json.
+      Internally, each uses a subgrid to allow layout control for nested elements.
+
+      Once inside a landmark, you can use *-area utility classes to position your content in specific parts of the grid.
 
 
-   <br>
+      | Class Name                  | Description                                                   |
+      |-----------------------------|---------------------------------------------------------------|
+      | `wide-area`                 | Spans the full width of the layout.                           |
+      | `wide-half-left-area`       | Left half of full width layout (from edge to center).         |
+      | `wide-half-right-area`      | Right half of full width layout (from center to edge).        |
+      | `container-area`            | Content constrained to the container width (c-container).     |
+      | `container-wide-left-area`  | From left edge to container's right edge.                     |
+      | `container-wide-right-area`	| From container's left edge to the right edge of the layout.   |
+      | `main-area`                 | Uses the central part of the layout (c-main).                 |
+      | `half-left-area`            | Left half of main content area.                               |
+      | `half-right-area`           | Right half of main content area.                              |
+      | `aside-left-area`           | Aligns content within the left aside column (c-aside-left).   |
+      | `aside-right-area`          | Aligns content within the right aside column (c-aside-right). |
+      | `margin-left-area`          | From edge of layout to start of container.                    |
+      | `margin-right-area`         | From end of container to edge of layout.                      |
 
-   ---
+      *When using area classes, the content will align to grid columns set by the layout configuration.*
 
-   <br>
+      <!--
+      ***Reversed layout***
+      In some cases (e.g., RTL support or alternating layouts), you may want to reverse *-left/right-areas:
+
+      ```html
+      <div class="... grid-flow-row-dense">
+         <div class="...">
+            <div class="half-left-area">...</div>
+            <div class="half-right-area">...</div>
+         </div>
+         <div class="... grid-cols-reversed" data-layout>
+            <div class="half-left-area">...</div>
+            <div class="half-right-area">...</div>
+         </div>
+      ```
+
+      This will reverse the areas of the second nested <div>:
+      - half-left-area -> becomes half-right-area
+      - half-right-area -> becomes half-left-area
+
+      Use the `grid-flow-row-dense` class on the parent node to fix the correct behavior.
+      -->
+
+   3. **Nesting with Subgrid**
+      You can apply subgrid-x, subgrid-y, or subgrid utility classes to allow inner elements to inherit column/row structures:
+
+      ***Notes***
+      - All layout files are auto-generated based on the layout.config.json file.
+      - The CSS uses modern CSS Grid + custom properties. Browser support must include at least Grid level 2 (e.g., modern Chrome, Firefox, Safari).
+      - Use media queries and CSS variables to manage breakpoints and adapt layout dynamically.
+
+      <br>
+
+      ---
+
+      <br>
 
 
-   ## Notes
+      ## Notes
 
-   - All CSS variables must be prefixed with `--*` to be resolved as `var(--<scope>-*)`.
-   - Color values support CSS valid colors, or CSS variables.
-   - Clamp logic applies automatically to typography, spacing, and layout values when providing min-max arrays.
+      - All CSS variables must be prefixed with `--*` to be resolved as `var(--<scope>-*)`.
+      - Color values support CSS valid colors, or CSS variables.
+      - Clamp logic applies automatically to typography, spacing, and layout values when providing min-max arrays.
 </details>
+
+<br>
+
+---
+
+<br>
+
+
+## Help
+
+For help on any command:
+
+```shell
+tws <command> --help
+```
 
 <br>
 
