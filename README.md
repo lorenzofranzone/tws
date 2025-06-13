@@ -237,8 +237,10 @@ tws <command> [options]
    <div class="theme-primary bg-color text-on-color">...</div>
    <div class="theme-primary-fixed bg-color text-on-color">...</div>
    ```
+   
    Switching between themes updates all related colors automatically.
    Switching modes (e.g. via data-theme="dark" if using toggle: "attr") adapts them for dark mode:
+   
    ```html
    <html data-theme="dark">
       ...
@@ -496,6 +498,7 @@ tws <command> [options]
 
 <details>
    <summary>Colors config</summary>
+   
    ```json
    {
       "outDir": "src/styles/tws/colors",
@@ -555,6 +558,7 @@ tws <command> [options]
 </details>
 <details>
    <summary>Typography config</summary>
+   
    ```json
    {
       "outDir": "src/styles/tws/typography",
@@ -581,6 +585,7 @@ tws <command> [options]
 </details>
 <details>
    <summary>Spacing config</summary>
+
    ```json
    {
       "outDir": "src/styles/tws/spacing",
@@ -602,6 +607,7 @@ tws <command> [options]
 </details>
 <details>
    <summary>Layout config</summary>
+   
    ```json
    {
       "outDir": "src/styles/tws/layout",
@@ -626,6 +632,7 @@ tws <command> [options]
 
 <details>
    <summary>Markup</summary>
+   
    ```html
    <html data-theme="light">
       <body data-layout>
