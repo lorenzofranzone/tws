@@ -492,10 +492,10 @@ tws <command> [options]
 
 ## Very pratical example
 
-We start from these config files:
+1.**We start from these config files:**
 
 <details>
-   <summary>Colors config<summary>
+   <summary>Colors config</summary>
    ```json
    {
       "outDir": "src/styles/tws/colors",
@@ -554,7 +554,7 @@ We start from these config files:
    ```
 </details>
 <details>
-   <summary>Typography config<summary>
+   <summary>Typography config</summary>
    ```json
    {
       "outDir": "src/styles/tws/typography",
@@ -580,7 +580,7 @@ We start from these config files:
    ```
 </details>
 <details>
-   <summary>Spacing config<summary>
+   <summary>Spacing config</summary>
    ```json
    {
       "outDir": "src/styles/tws/spacing",
@@ -601,7 +601,7 @@ We start from these config files:
    ```
 </details>
 <details>
-   <summary>Layout config<summary>
+   <summary>Layout config</summary>
    ```json
    {
       "outDir": "src/styles/tws/layout",
@@ -620,10 +620,12 @@ We start from these config files:
    ```
 </details>
 
-With the css generated we can write a simple layout:
+<br>
+
+2.**With the css generated we can write a simple layout:**
 
 <details>
-   <summary>Markup<summary>
+   <summary>Markup</summary>
    ```html
    <html data-theme="light">
       <body data-layout>
