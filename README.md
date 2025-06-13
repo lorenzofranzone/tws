@@ -1,6 +1,6 @@
 # TWS — Tailwind 4 Styles Generator
 
-**TWS** is a command line tool to help you manage and generate modular Tailwind 4 styles with smart themes, responsive scales, and grid-powered layouts through modular configuration files and generate CSS outputs easily.
+**TWS** is a command line tool to help you manage and generate modular Tailwind 4 styles with smart themes, responsive scales, and grid-based layouts through modular configuration files and generate CSS outputs easily.
 
 Instantly generate semantic colors for any theme with built-in support for light and dark modes, responsive typography and spacing, and a flexible layout system based on a 12-column grid — all designed to streamline your design system and speed up your Tailwind workflow.
 
@@ -245,7 +245,7 @@ tws <command> [options]
    </html>
    ```
 
-   No need to manually rewrite CSS — everything is scoped and generated for you.
+   No need to manually rewrite CSS — all styles are scoped and automatically generated for you.
 
    Without a `theme-*` class, will use the properties of the default theme defined in `data.default`.
 
@@ -359,7 +359,7 @@ tws <command> [options]
       </body>
       ```
       
-      - You can omit any of these sections. The layout adapts based on presence of #aside-left and #aside-right.
+      - You can omit any of these sections. The layout adapts based on the presence of #aside-left and #aside-right.
       - This structure ensures consistent column management and responsive behavior.
 
       If you want to remove spacing between columns:
@@ -373,7 +373,7 @@ tws <command> [options]
       
       **:: Examples of layouts** <br>
       *The background color defines the landmark* <br>
-      *the dotted border defines the inner default area where direct children are placed*
+      *The dotted border defines the inner default area where direct children are placed*
       
       <br>
       <details>
@@ -482,6 +482,263 @@ tws <command> [options]
       - All CSS variables must be prefixed with `--*` to be resolved as `var(--<scope>-*)`.
       - Color values support CSS valid colors, or CSS variables.
       - Clamp logic applies automatically to typography, spacing, and layout values when providing min-max arrays.
+</details>
+
+<br>
+
+---
+
+<br>
+
+## Very pratical example
+
+We start from these config files:
+
+<details>
+   <summary>Colors config<summary>
+   ```json
+   {
+      "outDir": "src/styles/tws/colors",
+      "data": {
+         "schemes": {
+               "modes": ["light", "dark"],
+               "toggle": "attr"
+         },
+         "colors": {
+               "base": "color",
+               "map": {
+                  "neutral": {
+                     "color": ["--gray-700", "--gray-400"],
+                     "on-color": ["--white", "--gray-800"],
+                     "on-color-variant": ["--gray-100", "--gray-600"],
+                     "layer": ["--gray-50", "--indigo-900"],
+                     "on-layer": ["--gray-700", "--white"],
+                     "on-layer-variant": ["--gray-500", "--gray-100"],
+                     "surface": ["--gray-50", "--indigo-950"],
+                     "on-surface": ["--gray-700", "--gray-50"],
+                     "on-surface-variant": ["--gray-500", "--gray-200"],
+                     "outline": ["--neutral-600", "--indigo-500"],
+                     "outline-variant": ["--neutral-300", "--indigo-800"],
+                     "seed": ["--violet-900", "--violet-400"]
+                  },
+                  "primary": {
+                     "color": ["--violet-900", "--violet-400"],
+                     "on-color": ["--white", "--black"],
+                     "on-color-variant": ["--violet-100", "--violet-950"],
+                     "layer": ["--violet-900", "--violet-950"],
+                     "on-layer": ["--white", "--violet-50"],
+                     "on-layer-variant": ["--violet-100", "--violet-200"],
+                     "surface": ["--violet-100", "--violet-950"],
+                     "on-surface": ["--violet-950", "--violet-50"],
+                     "on-surface-variant": ["--gray-900", "--gray-200"],
+                     "primary": ["--cyan-600", "--cyan-500"]
+                  },
+                  "secondary": {
+                     "color": ["--fuchsia-900", "--fuchsia-400"],
+                     "on-color": ["--white", "--black"],
+                     "on-color-variant": ["--fuchsia-100", "--fuchsia-950"],
+                     "surface": ["--fuchsia-100", "--fuchsia-950"],
+                     "on-surface": ["--fuchsia-950", "--fuchsia-50"],
+                     "on-surface-variant": ["--fuchsia-900", "--fuchsia-200"]
+                  },
+                  "accent": {
+                     "color": ["--cyan-600", "--cyan-400"],
+                     "on-color": ["--white", "--cyan-950"],
+                     "on-color-variant": ["--cyan-100", "--cyan-900"]
+                  }
+               }
+         },
+         "default": "neutral"
+      }
+   }
+   ```
+</details>
+<details>
+   <summary>Typography config<summary>
+   ```json
+   {
+      "outDir": "src/styles/tws/typography",
+      "data": {
+         "sizes": {
+               "display": [32, 90],
+               "h1": [24, 32],
+               "h2": [22, 29],
+               "h3": [21, 26],
+               "h4": [19, 23],
+               "h5": [18, 20],
+               "h6": [17, 18],
+               "base": [16],
+               "sm": [14],
+               "xs": [13],
+               "2xs": [12],
+               "3xs": [11],
+               "sm-base": [14, 16],
+               "xs-sm": [13, 14]
+         }
+      }
+   }
+   ```
+</details>
+<details>
+   <summary>Spacing config<summary>
+   ```json
+   {
+      "outDir": "src/styles/tws/spacing",
+      "data": {
+         "sizes": {
+               "1x": [8, 16],
+               "2x": [10, 24],
+               "3x": [12, 32],
+               "4x": [16, 48],
+               "5x": [20, 64],
+               "6x": [24, 80],
+               "7x": [32, 96],
+               "8x": [48, 128],
+               "9x": [64, 160]
+         }
+      }
+   }
+   ```
+</details>
+<details>
+   <summary>Layout config<summary>
+   ```json
+   {
+      "outDir": "src/styles/tws/layout",
+      "data": {
+         "container": 1440,
+         "gap": [10, 24],
+         "breakout": 40,
+         "columnsCount": {
+               "aside-single": [0, 0, 0, 4],
+               "aside-left": [0, 0, 0, 3],
+               "aside-right": [0, 0, 0, 3]
+         },
+         "extraMargin": 8
+      }
+   }
+   ```
+</details>
+
+With the css generated we can write a simple layout:
+
+<details>
+   <summary>Markup<summary>
+   ```html
+   <html data-theme="light">
+      <body data-layout>
+         <header id="header" class="theme-primary bg-layer text-on-layer py-2x">
+            <div class="container-area flex justify-between gap-2x">
+                  <div id="logo">
+                     <span>TWS</span>
+                  </div>
+                  <nav>
+                     <ul class="flex gap-[1ch]" class="">
+                        <li><a href="/about">About</a></li>
+                        <li><a href="/services">Services</a></li>
+                        <li><a href="/contact">Contact</a></li>
+                     </ul>
+                  </nav>
+            </div>
+         </header>
+
+         <div id="intro" class="h-[20dvh] block overflow-hidden mb-4x">
+            <div class="wide-area h-full">
+                  <img src="https://picsum.photos/id/1/1920/1080" alt="Man at work with his computer" class="size-full object-cover">
+            </div>
+         </div>
+         
+         <main id="main" class="gap-3x">
+            <div>
+                  <h1 class="text-h1 font-bold leading-tight text-primary text-balance mb-3x">Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae expedita quisquam labore.</h1>
+         
+                  <p class="text-lg text-on-surface mb-2x">Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni, omnis, et delectus blanditiis alias sed iure ratione deleniti veritatis dolore a, quae cupiditate tenetur recusandae. Laborum, assumenda quam sunt ipsa soluta odit. Accusamus optio earum quasi consectetur ipsa rerum nulla. Exercitationem voluptatibus consectetur sed hic sit error, incidunt consequatur autem.</p>
+                  <p class="text-sm text-on-surface-variant mb-2x">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem sapiente distinctio numquam sed quasi dolores perspiciatis fugiat optio, quas quod magni eveniet natus laboriosam dolorem dolore. Quam, itaque aperiam? Placeat.</p>
+            </div>
+            
+            <div class="cards subgrid-x">
+                  <h2 class="text-h2 font-bold leading-tight text-primary mb-3x col-span-full">Lorem ipsum dolor sit amet</h2>
+
+                  <div class="col-span-full tx:half-left-area">
+                     <p class="text-sm text-on-surface-variant mb-2x">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem sapiente distinctio numquam sed quasi dolores perspiciatis fugiat optio, quas quod magni eveniet natus laboriosam dolorem dolore. Quam, itaque aperiam? Placeat.</p>
+                  </div>
+                  <div class="col-span-full tx:half-right-area">
+                     <p class="text-sm text-on-surface-variant mb-2x">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem sapiente distinctio numquam sed quasi dolores perspiciatis fugiat optio, quas quod magni eveniet natus laboriosam dolorem dolore. Quam, itaque aperiam? Placeat.</p>
+                  </div>
+            </div>
+         </main>
+
+         <aside id="aside-right" class="gap-(--layout-gap)">
+            <div class="theme-secondary bg-surface text-on-surface p-3x">
+                  <div>
+                     <h3 class="text-h3 font-bold leading-tight mb-2x text-primary text-balance">Lorem ipsum dolor sit amet consectetur.</h3>
+                     <p class="text-sm text-on-surface-variant">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corrupti illo ipsum dicta reiciendis provident in repellendus a porro, doloremque ratione.</p>
+                  </div>
+                  <div>
+                     <h3 class="text-h3 font-bold leading-tight mb-2x text-primary text-balance">Lorem ipsum dolor sit amet consectetur.</h3>
+                     <p class="text-sm text-on-surface-variant">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corrupti illo ipsum dicta reiciendis provident in repellendus a porro, doloremque ratione.</p>
+                  </div>
+            </div>
+         </aside>
+
+         <div id="outro" class="theme-primary bg-surface text-on-surface py-3x mt-4x">
+            <div class="container-area">
+                  <h3 class="text-h3 font-bold leading-tight mb-2x text-primary text-balance">Lorem ipsum dolor sit amet consectetur.</h3>
+                  <div class="col-span-full ty:half-left-area tx:container-third-left-area">
+                     <p class="text-sm text-on-surface-variant mb-2x">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem sapiente distinctio numquam sed quasi dolores perspiciatis fugiat optio, quas quod magni eveniet natus laboriosam dolorem dolore. Quam, itaque aperiam? Placeat.</p>
+                  </div>
+                  <div class="col-span-full ty:half-right-area tx:container-two-third-right-area">
+                     <p class="text-sm text-on-surface-variant mb-2x">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Delectus cumque eius est neque laborum, eligendi, enim adipisci corrupti id alias totam maiores nulla ducimus accusamus error fuga labore, atque sequi! Molestiae doloribus consectetur fugiat eveniet inventore. Quae, repudiandae inventore voluptatem quibusdam fugiat nam commodi ullam alias quod libero fugit aperiam tempore perspiciatis, eum accusantium ipsa cupiditate quisquam rerum vitae omnis quos deserunt adipisci asperiores! Minima, vero nemo enim praesentium quia suscipit, dolorem earum laborum excepturi, nesciunt est similique? Quia, a?</p>
+                  </div>
+            </div>
+         </div>
+
+         <footer id="footer" class="theme-primary bg-layer text-on-layer py-5x">
+            <div class="grid tx:grid-cols-2 gap-x-(--layout-gap) gap-y-3x">
+                  <div id="logo">
+                     <span>TWS</span>
+                  </div>
+                  <div class="grid ty:grid-cols-2 tx:grid-cols-3 flex-wrap gap-x-(--layout-gap) gap-y-5x">
+                     <nav class="flex-1">
+                        <h4 class="text-h4 font-bold mb-2x">Lorem ipsum dolor</h4>
+                        <ul class="grid gap-[1ch]" class="">
+                              <li><a href="/about">Link</a></li>
+                              <li><a href="/services">Link</a></li>
+                              <li><a href="/contact">Link</a></li>
+                        </ul>
+                     </nav>
+                     <nav class="flex-1">
+                        <h4 class="text-h4 font-bold mb-2x">Lorem ipsum dolor</h4>
+                        <ul class="grid gap-[1ch]" class="">
+                              <li><a href="/about">Link</a></li>
+                              <li><a href="/services">Link</a></li>
+                              <li><a href="/contact">Link</a></li>
+                        </ul>
+                     </nav>
+                     <nav class="flex-1">
+                        <h4 class="text-h4 font-bold mb-2x">Lorem ipsum dolor</h4>
+                        <ul class="grid gap-[1ch]" class="">
+                              <li><a href="/about">Link</a></li>
+                              <li><a href="/services">Link</a></li>
+                              <li><a href="/contact">Link</a></li>
+                        </ul>
+                     </nav>
+                  </div>
+            </div>
+         </footer>
+      </body>
+   <html>
+   ```
+</details>
+<details>
+   <summary>Preview</summary>
+   <img src="https://raw.githubusercontent.com/lorenzofranzone/tws/main/dist/docs/images/example.gif" />
+</details>
+<details>
+   <summary>Dark mode</summary>
+   By setting `data-theme="dark"`, we can change all our colors!
+   <br>
+   <img src="https://raw.githubusercontent.com/lorenzofranzone/tws/main/dist/docs/images/example-dark.png" />
 </details>
 
 <br>
