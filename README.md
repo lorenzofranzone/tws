@@ -255,7 +255,7 @@ tws <command> [options]
 
    <details>
       <summary>Visual example</summary>
-      <img src="https://raw.githubusercontent.com/lorenzofranzone/tws/main/dist/docs/images/colors/themes.gif" />
+      <img src="https://raw.githubusercontent.com/lorenzofranzone/tws/main/src/images/colors/themes.gif" />
    </details>
 
    <br>
@@ -380,27 +380,27 @@ tws <command> [options]
       <br>
       <details>
          <summary>Base Layout</summary>
-         <img src="https://raw.githubusercontent.com/lorenzofranzone/tws/main/dist/docs/images/layout/landmarks/layout-landmarks-1-responsive.gif" />
+         <img src="https://raw.githubusercontent.com/lorenzofranzone/tws/main/src/images/layout/landmarks/layout-landmarks-1-responsive.gif" />
       </details>
       <br>
       <details>
          <summary>Layout with sidebar on the left</summary>
-         <img src="https://raw.githubusercontent.com/lorenzofranzone/tws/main/dist/docs/images/layout/landmarks/layout-landmarks-2-responsive.gif" />
+         <img src="https://raw.githubusercontent.com/lorenzofranzone/tws/main/src/images/layout/landmarks/layout-landmarks-2-responsive.gif" />
       </details>
       <br>
       <details>
          <summary>Layout with sidebar on the right</summary>
-         <img src="https://raw.githubusercontent.com/lorenzofranzone/tws/main/dist/docs/images/layout/landmarks/layout-landmarks-3-responsive.gif" />
+         <img src="https://raw.githubusercontent.com/lorenzofranzone/tws/main/src/images/layout/landmarks/layout-landmarks-3-responsive.gif" />
       </details>
       <br>
       <details>
          <summary>Layout with sidebar on the left and right</summary>
-         <img src="https://raw.githubusercontent.com/lorenzofranzone/tws/main/dist/docs/images/layout/landmarks/layout-landmarks-4-responsive.gif" />
+         <img src="https://raw.githubusercontent.com/lorenzofranzone/tws/main/src/images/layout/landmarks/layout-landmarks-4-responsive.gif" />
       </details>
       <br>
       <details>
          <summary>Layout with all landmarks + intro and outro</summary>
-         <img src="https://raw.githubusercontent.com/lorenzofranzone/tws/main/dist/docs/images/layout/landmarks/layout-landmarks-5-responsive.gif" />
+         <img src="https://raw.githubusercontent.com/lorenzofranzone/tws/main/src/images/layout/landmarks/layout-landmarks-5-responsive.gif" />
       </details>
       <br>
 
@@ -444,22 +444,22 @@ tws <command> [options]
       <br>
       <details>
          <summary>Available areas on full width spaces</summary>
-         <img src="https://raw.githubusercontent.com/lorenzofranzone/tws/main/dist/docs/images/layout/areas/layout-areas-1.png" />
+         <img src="https://raw.githubusercontent.com/lorenzofranzone/tws/main/src/images/layout/areas/layout-areas-1.png" />
       </details>
       <br>
       <details>
          <summary>Available areas when a sidebar on the left is used</summary>
-         <img src="https://raw.githubusercontent.com/lorenzofranzone/tws/main/dist/docs/images/layout/areas/layout-areas-2.png" />
+         <img src="https://raw.githubusercontent.com/lorenzofranzone/tws/main/src/images/layout/areas/layout-areas-2.png" />
       </details>
       <br>
       <details>
          <summary>Available areas when a sidebar on the right is used</summary>
-         <img src="https://raw.githubusercontent.com/lorenzofranzone/tws/main/dist/docs/images/layout/areas/layout-areas-3.png" />
+         <img src="https://raw.githubusercontent.com/lorenzofranzone/tws/main/src/images/layout/areas/layout-areas-3.png" />
       </details>
       <br>
       <details>
          <summary>Available areas when two sidebars are used</summary>
-         <img src="https://raw.githubusercontent.com/lorenzofranzone/tws/main/dist/docs/images/layout/areas/layout-areas-4.png" />
+         <img src="https://raw.githubusercontent.com/lorenzofranzone/tws/main/src/images/layout/areas/layout-areas-4.png" />
       </details>
       <br>
 
@@ -741,13 +741,13 @@ tws <command> [options]
 </details>
 <details>
    <summary>Preview</summary>
-   <img src="https://raw.githubusercontent.com/lorenzofranzone/tws/main/dist/docs/images/example.gif" />
+   <img src="https://raw.githubusercontent.com/lorenzofranzone/tws/main/src/images/example.gif" />
 </details>
 <details>
    <summary>Dark mode</summary>
    By setting `data-theme="dark"`, we can change all our colors!
    <br>
-   <img src="https://raw.githubusercontent.com/lorenzofranzone/tws/main/dist/docs/images/example-dark.png" />
+   <img src="https://raw.githubusercontent.com/lorenzofranzone/tws/main/src/images/example-dark.png" />
 </details>
 
 <br>
