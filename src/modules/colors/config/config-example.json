@@ -9,25 +9,43 @@
             "base": "color",
             "map": {
                 "neutral": {
-                    "color": ["--neutral-50", "--indigo-950"],
-                    "on-color": ["--neutral-950", "--neutral-100"],
-                    "on-color-variant": ["--neutral-700", "--neutral-400"],
+                    "color": ["--gray-700", "--gray-400"],
+                    "on-color": ["--white", "--gray-800"],
+                    "on-color-variant": ["--gray-100", "--gray-600"],
+                    "layer": ["--gray-50", "--indigo-900"],
+                    "on-layer": ["--gray-700", "--white"],
+                    "on-layer-variant": ["--gray-500", "--gray-100"],
+                    "surface": ["--gray-50", "--indigo-950"],
+                    "on-surface": ["--gray-700", "--gray-50"],
+                    "on-surface-variant": ["--gray-500", "--gray-200"],
                     "outline": ["--neutral-600", "--indigo-500"],
                     "outline-variant": ["--neutral-300", "--indigo-800"],
-                    "seed": ["--violet-600", "--violet-400"]
+                    "seed": ["--violet-900", "--violet-400"]
                 },
                 "primary": {
-                    "color": ["--violet-950", "--violet-900"],
-                    "on-color": ["--white", "--neutral-50"],
-                    "on-color-variant": ["--violet-200", "--violet-200"],
-                    "outline": ["--violet-300", "--violet-300"],
-                    "outline-variant": ["--violet-700", "--violet-600"],
-                    "gradient-stop-1": ["--violet-950", "--purple-800"],
-                    "gradient-stop-2": ["--purple-800", "--violet-900"]
+                    "color": ["--violet-900", "--violet-400"],
+                    "on-color": ["--white", "--black"],
+                    "on-color-variant": ["--violet-100", "--violet-950"],
+                    "layer": ["--violet-900", "--violet-950"],
+                    "on-layer": ["--white", "--violet-50"],
+                    "on-layer-variant": ["--violet-100", "--violet-200"],
+                    "surface": ["--violet-100", "--violet-950"],
+                    "on-surface": ["--violet-950", "--violet-50"],
+                    "on-surface-variant": ["--gray-900", "--gray-200"],
+                    "primary": ["--cyan-600", "--cyan-500"]
+                },
+                "secondary": {
+                    "color": ["--fuchsia-900", "--fuchsia-400"],
+                    "on-color": ["--white", "--black"],
+                    "on-color-variant": ["--fuchsia-100", "--fuchsia-950"],
+                    "surface": ["--fuchsia-100", "--fuchsia-950"],
+                    "on-surface": ["--fuchsia-950", "--fuchsia-50"],
+                    "on-surface-variant": ["--fuchsia-900", "--fuchsia-200"]
                 },
                 "accent": {
-                    "color": ["--amber-500", "--amber-500"],
-                    "on-color": ["--white", "--white"]
+                    "color": ["--cyan-600", "--cyan-400"],
+                    "on-color": ["--white", "--cyan-950"],
+                    "on-color-variant": ["--cyan-100", "--cyan-900"]
                 }
             }
         },

@@ -14,7 +14,8 @@
   "scripts": {
     "clean": "rimraf dist",
     "copy-json": "npx copyfiles -u 2 \"src/modules/**/config/*.json\" dist/modules",
-    "build": "tsc && npm run copy-json",
+    "copy-images": "npx copyfiles -u 2 \"src/images/**/*\" dist/docs/images",
+    "build": "tsc && npm run copy-json && npm run copy-images",
     "start": "node dist/cli/cli.js",
     "dev": "ts-node src/cli/cli.ts"
   },

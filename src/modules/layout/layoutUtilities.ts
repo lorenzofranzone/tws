@@ -33,9 +33,9 @@ export default `@layer base {
         --_global-rows:
             [r-header] auto
             [r-intro] auto
-            [r-aside-left] minmax(0, auto)
+            [r-aside-left] auto
             [r-main] 1fr
-            [r-aside-right] minmax(0, auto)
+            [r-aside-right] auto
             [r-outro] auto
             [r-footer] auto;
 

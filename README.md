@@ -222,17 +222,20 @@ tws <command> [options]
          "color": ["--primary-500", "--primary-400"],
          "on-color": ["--neutral-950"],
       },
+      ...
    }
    ```
 
    In this example:
    - neutral and primary define semantic themes.
+   - Each theme generates an additional `*-fixed` variant to keep the same color in light and dark mode if needed.
    - Each theme can automatically switch between light/dark values based on the selected mode.
    - You can change the theme just by applying a class:
 
    ```html
    <div class="theme-neutral bg-color text-on-color">...</div>
    <div class="theme-primary bg-color text-on-color">...</div>
+   <div class="theme-primary-fixed bg-color text-on-color">...</div>
    ```
    Switching between themes updates all related colors automatically.
    Switching modes (e.g. via data-theme="dark" if using toggle: "attr") adapts them for dark mode:
@@ -243,6 +246,15 @@ tws <command> [options]
    ```
 
    No need to manually rewrite CSS — everything is scoped and generated for you.
+
+   Without a `theme-*` class, will use the properties of the default theme defined in `data.default`.
+
+   <br>
+
+   <details>
+      <summary>Visual example</summary>
+      <img src="https://raw.githubusercontent.com/lorenzofranzone/tws/main/dist/docs/images/colors/themes.gif" />
+   </details>
 
    <br>
 
@@ -280,7 +292,8 @@ tws <command> [options]
    }
    ```
 
-   So you can use ```<h1 class="text-h1">...</h1>```
+   So you can use ```<h1 class="text-h1">...</h1>``` instead of ```<h1 class="text-[24px] md:text-[28px] lg:text-[32px]">...</h1>``` or writing media queries in external css files.
+
 
    <br>
    
@@ -298,7 +311,7 @@ tws <command> [options]
    }
    ```
 
-   So you can use ```<div class="p-xl">...</div>```
+   So you can use ```<div class="p-xl">...</div>``` instead of ```<div class="p-[24px] md:p-[28px] lg:p-[32px]">...</div>``` or writing media queries in external css files.
 
 
    <br>
@@ -325,7 +338,7 @@ tws <command> [options]
 
    1. **Basic layout structure**
 
-      The layout system is based on a 12-column CSS grid. You must wrap your main sections in a <body data-layout> or a container with data-layout attribute.
+      The layout system is based on a 12-column CSS grid. You must wrap your main sections in a <body data-layout> or a container with `data-layout` attribute.
 
       ```html
       <body data-layout>
@@ -356,6 +369,38 @@ tws <command> [options]
          ...
       </body>
       ```
+      <br>
+      
+      **:: Examples of layouts** <br>
+      *The background color defines the landmark* <br>
+      *the dotted border defines the inner default area where direct children are placed*
+      
+      <br>
+      <details>
+         <summary>Base Layout</summary>
+         <img src="https://raw.githubusercontent.com/lorenzofranzone/tws/main/dist/docs/images/layout/landmarks/layout-landmarks-1-responsive.gif" />
+      </details>
+      <br>
+      <details>
+         <summary>Layout with sidebar on the left</summary>
+         <img src="https://raw.githubusercontent.com/lorenzofranzone/tws/main/dist/docs/images/layout/landmarks/layout-landmarks-2-responsive.gif" />
+      </details>
+      <br>
+      <details>
+         <summary>Layout with sidebar on the right</summary>
+         <img src="https://raw.githubusercontent.com/lorenzofranzone/tws/main/dist/docs/images/layout/landmarks/layout-landmarks-3-responsive.gif" />
+      </details>
+      <br>
+      <details>
+         <summary>Layout with sidebar on the left and right</summary>
+         <img src="https://raw.githubusercontent.com/lorenzofranzone/tws/main/dist/docs/images/layout/landmarks/layout-landmarks-4-responsive.gif" />
+      </details>
+      <br>
+      <details>
+         <summary>Layout with all landmarks + intro and outro</summary>
+         <img src="https://raw.githubusercontent.com/lorenzofranzone/tws/main/dist/docs/images/layout/landmarks/layout-landmarks-5-responsive.gif" />
+      </details>
+      <br>
 
    2. **Landmark rules**
 
@@ -387,6 +432,34 @@ tws <command> [options]
       | `aside-right-area`               | Content aligned within the right aside column.                             |
       | `margin-left-area`               | From the layout's left edge to the start of the container.                 |
       | `margin-right-area`              | From the end of the container to the layout’s right edge.                  |
+      
+      <br>
+
+      **:: Examples of areas** <br>
+      *The background color defines the landmark* <br>
+      *the dotted border defined the inner default area where direct children are placed*
+      
+      <br>
+      <details>
+         <summary>Available areas on full width spaces</summary>
+         <img src="https://raw.githubusercontent.com/lorenzofranzone/tws/main/dist/docs/images/layout/areas/layout-areas-1.png" />
+      </details>
+      <br>
+      <details>
+         <summary>Available areas when a sidebar on the left is used</summary>
+         <img src="https://raw.githubusercontent.com/lorenzofranzone/tws/main/dist/docs/images/layout/areas/layout-areas-2.png" />
+      </details>
+      <br>
+      <details>
+         <summary>Available areas when a sidebar on the right is used</summary>
+         <img src="https://raw.githubusercontent.com/lorenzofranzone/tws/main/dist/docs/images/layout/areas/layout-areas-3.png" />
+      </details>
+      <br>
+      <details>
+         <summary>Available areas when two sidebars are used</summary>
+         <img src="https://raw.githubusercontent.com/lorenzofranzone/tws/main/dist/docs/images/layout/areas/layout-areas-4.png" />
+      </details>
+      <br>
 
 
    3. **Nesting with Subgrid**
