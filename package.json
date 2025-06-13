@@ -20,9 +20,9 @@
     "dev": "ts-node src/cli/cli.ts"
   },
   "keywords": [],
-  "author": "",
+  "author": "Lorenzo Franzone",
   "license": "ISC",
-  "description": "",
+  "description": "Tailwind 4 Styles Generator",
   "dependencies": {
     "@clack/prompts": "^0.11.0",
     "chalk": "^5.4.1",
