@@ -135,7 +135,10 @@ export function processColors(input: IColorsConfig): { outDir: string; data: any
     Object.entries(defProps).forEach(([prop, vals]) => {
       const v2 = vals[1];
       if (v2 && isValidColor(v2)) {
-        secondAdapted[`${refPrefix}-${prop}`] = toRootVar(v2);
+        const name = adapter === 'reference'
+          ? `${refPrefix}-${prop}`
+          : `${regPrefix}-${prop}`;
+        secondAdapted[name] = toRootVar(v2);
       }
     });
 
