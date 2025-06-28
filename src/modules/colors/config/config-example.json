@@ -1,0 +1,23 @@
+{
+	"outDir": "src/styles/tws/colors",
+    "data": {
+        "schemes": {
+            "modes": ["light", "dark"],
+            "toggle": "attr"
+        },
+        "colors": {
+            "base": "color",
+            "map": {
+                "neutral": {
+                    "color": ["#FCFAFE", "#1C083E"],
+                    "on-color": ["--neutral-900", "--neutral-100"]
+                },
+                "primary": {
+                    "color": ["--violet-900", "--violet-400"],
+                    "on-color": ["--violet-50", "--violet-950"]
+                }
+            }
+        },
+        "default": "neutral"
+    }
+}

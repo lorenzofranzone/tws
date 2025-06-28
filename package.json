@@ -1,0 +1,45 @@
+{
+  "name": "@lorenzofranzone/tws",
+  "version": "1.0.0",
+  "main": "dist/cli/index.js",
+  "bin": {
+    "tws": "./bin/tws"
+  },
+  "files": [
+    "dist",
+    "bin",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "clean": "rimraf dist",
+    "copy-json": "npx copyfiles -u 2 \"src/modules/**/config/*.json\" dist/modules",
+    "build": "tsc && npm run copy-json",
+    "start": "node dist/cli/cli.js",
+    "dev": "ts-node src/cli/cli.ts"
+  },
+  "keywords": [],
+  "author": "Lorenzo Franzone",
+  "license": "ISC",
+  "description": "Tailwind 4 Styles Generator",
+  "dependencies": {
+    "@clack/prompts": "^0.11.0",
+    "chalk": "^5.4.1",
+    "chroma-js": "^3.1.2",
+    "commander": "^14.0.0",
+    "figlet": "^1.8.1",
+    "fs-extra": "^11.3.0",
+    "globby": "^14.1.0"
+  },
+  "devDependencies": {
+    "@types/chroma-js": "^3.1.1",
+    "@types/figlet": "^1.7.0",
+    "@types/fs-extra": "^11.0.4",
+    "@types/node": "^22.15.21",
+    "copyfiles": "^2.4.1",
+    "nodemon": "^3.1.10",
+    "rimraf": "^6.0.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  }
+}

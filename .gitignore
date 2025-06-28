@@ -1,0 +1,40 @@
+# Dipendenze
+/node_modules/
+
+# Log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build e output
+/dist/
+/build/
+
+# Configurazioni dell'IDE/editor
+.vscode/
+.idea/
+*.swp
+*.sublime-project
+*.sublime-workspace
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# Ambiente
+.env
+.env.local
+.env.*.local
+
+# Altri file temporanei
+*.log
+*.tmp
+*.bak
+notes.txt
+
+# Esecuzione CLI in link simbolico
+*.tgz
+
+# Optional: escludi test coverage
+/coverage/
+.nyc_output/
