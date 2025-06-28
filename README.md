@@ -20,13 +20,13 @@ Instantly generate semantic colors for any theme with built-in support for light
 Install via npm:
 
 ```shell
-npm install tws
+npm install @lorenzo.franzone/tws
 ```
 
 or if you want it available globally
 
 ```shell
-npm install -g tws
+npm install -g @lorenzo.franzone/tws
 ```
 
 ## Usage

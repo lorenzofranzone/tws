@@ -1,6 +1,6 @@
 {
-  "name": "@lorenzofranzone/tws",
-  "version": "1.0.0",
+  "name": "@lorenzo.franzone/tws",
+  "version": "1.0.1",
   "main": "dist/cli/index.js",
   "bin": {
     "tws": "./bin/tws"
