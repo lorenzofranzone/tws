@@ -1,6 +1,6 @@
 {
   "name": "@lorenzo.franzone/tws",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "main": "dist/cli/index.js",
   "bin": {
     "tws": "./bin/tws"
@@ -18,7 +18,21 @@
     "start": "node dist/cli/cli.js",
     "dev": "ts-node src/cli/cli.ts"
   },
-  "keywords": [],
+  "keywords": [
+    "tailwind",
+    "tailwindcss",
+    "tailwind-styles",
+    "tailwindcss-styles",
+    "tailwind-styles-generator",
+    "tailwindcss-styles-generator",
+    "tailwind-css-generator",
+    "tailwindcss-css-generator",
+    "css-generator",
+    "custom-tailwind-colors-generator",
+    "custom-tailwind-typography-generator",
+    "custom-tailwind-spacing-generator",
+    "custom-tailwind-layout-generator"
+  ],
   "author": "Lorenzo Franzone",
   "license": "ISC",
   "description": "Tailwind 4 Styles Generator",
