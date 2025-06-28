@@ -127,7 +127,7 @@ npm install -g @lorenzo.franzone/tws
 
    #### Typical workflow
 
-   - Install the cli: `npm install tws`
+   - Install the cli: `npm install @lorenzo.franzone/tws`
    - Initialize the project and select the modules you need:`tws init`
    - Generate the CSS files when your configs are ready: `tws css`
 
