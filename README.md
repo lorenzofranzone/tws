@@ -11,8 +11,8 @@ Instantly generate semantic colors for any theme with built-in support for light
 **Table of contents**
 - <a href="#installation">Installation</a>
 - <a href="#usage">Usage</a>
-- <a href="#commands">Commands and options</a>
-- <a href="#configs">Config files</a>
+- <a href="#commands-and-options">Commands and options</a>
+- <a href="#config-files">Config files</a>
 - <a href="#help">Help</a>
 
 ## Installation
