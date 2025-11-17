@@ -4,6 +4,16 @@ import { configCommand } from './commands/ConfigCommand';
 import { cssCommand } from './commands/CssCommand';
 import { initCommand } from './commands/InitCommand';
 
+const required = 20;
+const current = parseInt(process.versions.node.split('.')[0], 10);
+
+if (current < required) {
+  console.error(
+    `❌ TWS: This CLI requires Node ${required}+ but you are using ${process.version}.`
+  );
+  process.exit(1);
+}
+
 const program = new Command();
 
 // CLI metadata
