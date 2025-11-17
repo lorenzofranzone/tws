@@ -1,7 +1,6 @@
 export default `@layer base {
     html,
     body {
-        height: 100%;
         overflow-x: hidden;
     }
 
