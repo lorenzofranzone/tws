@@ -1,6 +1,6 @@
 {
   "name": "@lorenzo.franzone/tws",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "main": "dist/cli/index.js",
   "bin": {
     "tws": "./bin/tws"
@@ -33,6 +33,10 @@
     "custom-tailwind-spacing-generator",
     "custom-tailwind-layout-generator"
   ],
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "engineStrict": true,
   "author": "Lorenzo Franzone",
   "license": "ISC",
   "description": "Tailwind 4 Styles Generator",
