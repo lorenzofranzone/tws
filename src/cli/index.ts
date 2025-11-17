@@ -1,9 +1,3 @@
-import { Command } from 'commander';
-
-import { configCommand } from './commands/ConfigCommand';
-import { cssCommand } from './commands/CssCommand';
-import { initCommand } from './commands/InitCommand';
-
 const required = 20;
 const current = parseInt(process.versions.node.split('.')[0], 10);
 
@@ -13,6 +7,12 @@ if (current < required) {
   );
   process.exit(1);
 }
+
+import { Command } from 'commander';
+
+import { configCommand } from './commands/ConfigCommand';
+import { cssCommand } from './commands/CssCommand';
+import { initCommand } from './commands/InitCommand';
 
 const program = new Command();
 

@@ -19,6 +19,10 @@ Instantly generate semantic colors for any theme with built-in support for light
 
 Install via npm:
 
+**[Requires Node version >=20]**
+TWS CLI uses modern ESM syntax and Node features that are only available in Node 20 and above.
+If you’re running Node 18 or older, please upgrade before using the CLI.
+
 ```shell
 npm install @lorenzo.franzone/tws
 ```
